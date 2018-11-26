@@ -6,3 +6,4 @@ from .coffee import coffee_compile
 from .babel import babel_compile, jsx_compile
 from .tsc import typescript_compile
 from .lessc import less_compile
+from .vuejs import vue_template_compiler

@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 
-from dukpy.webassets import BabelJS, TypeScript, CompileLess, BabelJSX
+from dukpy.webassets import BabelJS, TypeScript, CompileLess, BabelJSX, CompileVueTemplate
 from diffreport import report_diff
 from webassets.test import TempEnvironmentHelper
 
@@ -145,3 +145,22 @@ class HelloWorld extends Component {
             'babel_modules_loader': 'systemjs'
         }).build()
         assert 'System.register(["react"]' in self.get('out')
+
+
+class TestVueFilter(TempEnvironmentHelper):
+    TEMPLATE = '''
+    <div v-if="test">TEST
+    </div>
+'''
+
+    @classmethod
+    def setup_class(cls):
+        from webassets.filter import register_filter
+        register_filter(CompileVueTemplate)
+
+    def test_template(self):
+        self.create_files({'in': self.TEMPLATE})
+        self.mkbundle('in', filters='vuejs-template', output='out').build()
+        import pdb; pdb.set_trace()
+        assert '_createClass(TEST, ' in self.get('out')
+        assert 'require' in self.get('out')
