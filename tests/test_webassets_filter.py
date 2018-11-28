@@ -161,6 +161,4 @@ class TestVueFilter(TempEnvironmentHelper):
     def test_template(self):
         self.create_files({'in': self.TEMPLATE})
         self.mkbundle('in', filters='vuejs-template', output='out').build()
-        import pdb; pdb.set_trace()
-        assert '_createClass(TEST, ' in self.get('out')
-        assert 'require' in self.get('out')
+        assert 'TEST' in self.get('out')

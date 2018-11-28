@@ -422,7 +422,7 @@ function parseHTML (html, options) {
         if (!isPlainTextElement(stackedTag) && stackedTag !== 'noscript') {
           text = text
             .replace(/<!\--([\s\S]*?)-->/g, '$1') // #7298
-            .replace(/<!\[CDATA\[([\s\S]*?)]]>/g, '$1');
+            .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1');
         }
         if (shouldIgnoreFirstNewline(stackedTag, text)) {
           text = text.slice(1);
@@ -3388,7 +3388,7 @@ function isDirectChildOfTemplateFor (node) {
 /*  */
 
 var fnExpRE = /^([\w$_]+|\([^)]*?\))\s*=>|^function\s*\(/;
-var simplePathRE = /^[A-Za-z_$][\w$]*(?:\.[A-Za-z_$][\w$]*|\['[^']*?']|\["[^"]*?"]|\[\d+]|\[[A-Za-z_$][\w$]*])*$/;
+var simplePathRE = /^[A-Za-z_$][\w$]*(?:\.[A-Za-z_$][\w$]*|\['[^']*?'\]|\["[^"]*?"\]|\[\d+\]|\[[A-Za-z_$][\w$]*\])*$/;
 
 // KeyboardEvent.keyCode aliases
 var keyCodes = {
