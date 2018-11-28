@@ -2,8 +2,8 @@ try {
   var vueVersion = require('vue').version
 } catch (e) {}
 
-var packageName = require('./package.json').name
-var packageVersion = require('./package.json').version
+var packageName = require('./package.js').name
+var packageVersion = require('./package.js').version
 if (vueVersion && vueVersion !== packageVersion) {
   throw new Error(
     '\n\nVue packages version mismatch:\n\n' +
